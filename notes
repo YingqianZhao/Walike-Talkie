@@ -1,0 +1,27 @@
+This folder contains the code we used to test padding schemes.
+Padding schemes are simulated (not generated on Tor). 
+
+- Our padding scheme (equal_*, evaluater.py, selecter.py, run-*.sh):
+
+equal_tester.py is called for random padding schemes and equal_tester-det.py is called for deterministic ones.
+equal_*.py implements shallow testing (testing each algorithm briefly and getting many possible outputs)
+selecter.py takes the output of equal*.py and chooses the best 100
+evaluater.py implements deep testing on those from selecter.py (testing each algorithm a lot so our error bars become reasonable)
+An example of how we called these files is in run-equal.sh and run-evaluater.sh.
+transform.py describes several file formats and functions to transform one into another. 
+equal_padding_prob.py implements the actual padding and calculations of max attacker accuracy.
+
+Note that equal_tester.py and equal_tester-det.py are currently pointing to a data folder in the variable in INPUT_LOC.
+You'll have to change that to wherever your data is (since we want to publish them in separate zip files). 
+Transformations may be needed if your data is in another format. We released our data in .cell and .burst format. These files use the .burst format. 
+
+- Alternative padding scheme (alt-*):
+
+alt-*.py files implement the three alternative variants of Walkie-Talkie.
+alt-noise.py violates generality, alt-decoy.py violates ease of use, alt-cluster.py violates decentralization.
+
+- Previous schemes (cluster-*, tamaraw-*):
+
+cluster-*.py is for Supersequence, tamaraw-*.py is for Tamaraw.
+*-time.py is for testing Morphing, *-fixedtime.py is for testing Padding. 
+The results of *-time.py, when parsed, determined the parameters we used for *-fixedtime.py. 
